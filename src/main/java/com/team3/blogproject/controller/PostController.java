@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class PostController {
         return findPaginated(1, model);
     }
 
-    @GetMapping("/showNewPostForm")
+    @GetMapping("/post/new")
     public String showNewPostForm(Model model) {
         Post post = new Post();
         model.addAttribute("post", post);
@@ -37,17 +34,24 @@ public class PostController {
         return "redirect:/";
     }
 
-    @GetMapping("/showFormForUpdate/{id}")
-    public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
+    @GetMapping("/post/{id}")
+    public String updatePost(@PathVariable(value = "id") long id, Model model) {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
         return "forms/update_post";
     }
 
     @GetMapping("/deletePost/{id}")
+    public String confirmDelete(@PathVariable(value= "id") long id, Model model) {
+        Post post = postService.getPostById(id);
+        model.addAttribute("post", post);
+        return "forms/delete_post";
+    }
+
+    @GetMapping ("/deletePost/{id}/confirm")
     public String deletePost(@PathVariable(value = "id") long id) {
         this.postService.deletePostById(id);
-        return "redirect:/";
+        return "redirect:/?deleted";
     }
 
     @GetMapping("/page/{pageNo}")

@@ -16,7 +16,7 @@
     <h1>Blog Site</h1>
 
 <!-- sec:authorize="isAuthenticated()" to  -->
-    <a th:href = "@{/showNewPostForm}" class="btn btn-primary btn-sm mb-3"> Add Post </a>
+    <a th:href = "@{/post/new}" class="btn btn-primary btn-sm mb-3"> Add Post </a>
 
     <div class="container my-2">
         <h1>Post List</h1>
@@ -41,12 +41,14 @@
                 <td th:text="${post.title}"></td>
                 <td th:text="${post.content}"></td>
                 <td th:text="${post.id}"></td>
-                <td> <a th:href="@{/showFormForUpdate/{id}(id=${post.id})}" class="btn btn-primary">Update</a>
+                <td> <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Update</a>
                     <a th:href="@{/deletePost/{id}(id=${post.id})}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             </tbody>
         </table>
+
+        <div class="delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
 
         <div th:if = "${totalPages > 1}">
             <div class = "row col-sm-10">

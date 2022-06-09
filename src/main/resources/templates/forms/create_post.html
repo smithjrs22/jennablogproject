@@ -5,6 +5,16 @@
     <title>Title</title>
 </head>
 <body>
+    <form action="#" th:action="@{/savePost}" th:object="${post}" method="POST">
+        <input type="text" th:field="*{title}" placeholder="Post Title" class="form-control mb-4 col-4">
 
+        <textarea th:field="*{content}" placeholder="Enter content here" class="form-control mb-4 col-4"/>
+
+        <button type="submit" class="btn btn-info col-2"> Submit Post</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/}"> Back to Post List</a>
 </body>
 </html>

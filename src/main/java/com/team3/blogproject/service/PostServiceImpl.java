@@ -38,7 +38,7 @@ public class PostServiceImpl implements PostService {
     public void deletePostById(long id) {
         this.postRepository.deleteById(id);
     }
-
+    
     @Override
     public Page<Post> findPaginated(int pageNum, int pageSize) {
         Sort sort = Sort.by("id").descending();

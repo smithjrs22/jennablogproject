@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostRepository postRepository;
@@ -26,11 +26,12 @@ public class PostServiceImpl implements PostService{
     public Post getPostById(long id) {
         Optional<Post> optional = postRepository.findById(id);
         Post post = null;
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             post = optional.get();
         } else {
-            throw new RuntimeException("Post not found with ID ::"+id);
-        } return post;
+            throw new RuntimeException("Post not found with ID ::" + id);
+        }
+        return post;
     }
 
     @Override

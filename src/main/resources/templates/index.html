@@ -25,6 +25,9 @@
             <thead>
             <tr>
                 <th>
+                    Post date
+                </th>
+                <th>
                     Post title
                 </th>
                 <th>
@@ -38,7 +41,10 @@
             </thead>
             <tbody>
             <tr th:each="post : ${listPosts}">
-                <td th:text="${post.title}"></td>
+                <td th:text="${post.date}"></td>
+                <td >
+                    <a href="/" th:text="${post.title}" th:href="@{/posts/view/{id}(id=${post.id})}"></a>
+                </td>
                 <td th:text="${post.content}"></td>
                 <td th:text="${post.id}"></td>
                 <td> <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Update</a>
@@ -73,5 +79,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>

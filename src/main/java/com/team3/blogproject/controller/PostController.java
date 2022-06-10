@@ -42,13 +42,13 @@ public class PostController {
     }
 
     @GetMapping("/deletePost/{id}")
-    public String confirmDelete(@PathVariable(value= "id") long id, Model model) {
+    public String confirmDelete(@PathVariable(value = "id") long id, Model model) {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
         return "forms/delete_post";
     }
 
-    @GetMapping ("/deletePost/{id}/confirm")
+    @GetMapping("/deletePost/{id}/confirm")
     public String deletePost(@PathVariable(value = "id") long id) {
         this.postService.deletePostById(id);
         return "redirect:/?deleted";
@@ -56,7 +56,7 @@ public class PostController {
 
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-                                Model model) {
+            Model model) {
         int pageSize = 3;
         Page<Post> page = postService.findPaginated(pageNo, pageSize);
         List<Post> listPosts = page.getContent();
@@ -67,5 +67,12 @@ public class PostController {
 
         model.addAttribute("listPosts", listPosts);
         return "index";
+    }
+
+    @RequestMapping("/posts/view/{id}")
+    public String view(@PathVariable("id") Long id, Model model) {
+        Post post = postService.getPostById(id);
+        model.addAttribute("post", post);
+        return "posts/view";
     }
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <title th:text="${post.title}">View Post</title>
+<body>
+
+
+<main id="posts">
+  <article>
+    <h2 class="title" th:text="${post.title}">Post Title</h2>
+    <div class="date">
+        <i>Posted on</i>
+        <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}"></span>
+      
+    </div>
+    <p class="content" th:utext="${post.content}">Post content</p>
+  </article>
+</main>
+
+
+</body>
+
+</html>

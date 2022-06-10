@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @Validated
 public class PostController {
 
-    @Autowired
+    @AutoWired
     private PostService postService;
 
     @GetMapping("/")

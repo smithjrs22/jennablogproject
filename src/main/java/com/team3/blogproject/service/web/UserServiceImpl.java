@@ -1,4 +1,4 @@
-package com.team3.blogproject.services.web;
+package com.team3.blogproject.service.web;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,11 +12,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.team3.blogproject.models.Role;
-import com.team3.blogproject.models.User;
+import com.team3.blogproject.model.Role;
+import com.team3.blogproject.model.User;
 import com.team3.blogproject.repository.UserRepository;
-import com.team3.blogproject.services.UserService;
-import com.team3.blogproject.services.dto.UserRegistrationDto;
+import com.team3.blogproject.service.UserService;
+import com.team3.blogproject.service.dto.UserRegistrationDto;
 
 @Service
 public class UserServiceImpl implements UserService{

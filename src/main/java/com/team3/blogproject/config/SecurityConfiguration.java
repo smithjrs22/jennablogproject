@@ -28,13 +28,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.team3.blogproject.services.UserService;
+import com.team3.blogproject.service.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-
 
     @Autowired
     private UserService userService;
@@ -62,6 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers(
+                        "/",
                         "/registration**",
                         "/js/**",
                         "/css/**",

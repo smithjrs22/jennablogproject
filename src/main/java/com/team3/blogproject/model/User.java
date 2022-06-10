@@ -1,4 +1,4 @@
-package com.team3.blogproject.models;
+package com.team3.blogproject.model;
 
 import javax.persistence.*;
 import java.util.Collection;

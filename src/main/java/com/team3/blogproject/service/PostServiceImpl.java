@@ -38,12 +38,12 @@ public class PostServiceImpl implements PostService {
     public void deletePostById(long id) {
         this.postRepository.deleteById(id);
     }
-
+    
     @Override
     public Page<Post> findPaginated(int pageNum, int pageSize) {
         Sort sort = Sort.by("id").descending();
 
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize).withSort(sort);
         return this.postRepository.findAll(pageable);
     }
 }

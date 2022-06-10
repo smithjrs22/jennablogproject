@@ -1,104 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 
 <head>
     <meta charset="UTF-8">
     <title>Team 3 Blog Project</title>
 
-    <link rel="stylesheet"
-
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 
 </head>
 <body>
+
     <h1>Blog Site</h1>
+    <a th:href = "@{/login}" class="btn btn-primary btn-sm mb-3"> Login </a>
+    <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
 
-    
-
-
-
-<!-- sec:authorize="isAuthenticated()" to  -->
-    <a th:href = "@{/post/new}" class="btn btn-primary btn-sm mb-3"> Add Post </a>
+    <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
 
 
-    <div class="container my-2">
-        <h1>Post List</h1>
+<div class="alert delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
 
-        <table border="1" class = "table table-striped table-responsive-md">
-            <thead>
-            <tr>
-                <th>
+<div class="container my-2 post-container">
+    <h1>Post List</h1>
 
-                    Post date
-                </th>
-                <th>
+    <a sec:authorize="isAuthenticated()" th:href="@{/post/new}" class="btn btn-primary btn-sm mb-3"> Add Post </a>
 
-                    Post title
-                </th>
-                <th>
-                    Post content
-                </th>
-                <th>
-                    Post id
-                </th>
-                <th> Actions </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="post : ${listPosts}">
-
-
-                <td th:text="${post.date}"></td>
-                <td >
+    <div th:each="post : ${listPosts}">
+        <div class="card">
+            <div class="card-header">
+                <p>Created on: <span th:text="${post.date}"></span></p>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
                     <a href="/" th:text="${post.title}" th:href="@{/posts/view/{id}(id=${post.id})}"></a>
-                </td>
-                <td th:text="${post.content}"></td>
-                <td th:text="${post.id}"></td>
-                <td> <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Update</a>
+                </h5>
+                <p class="card-text" th:text="${post.content}"></p>
+                <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/deletePost/{id}(id=${post.id})}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
 
-                    <a th:href="@{/deletePost/{id}(id=${post.id})}" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-
-        <div class="delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
-
-
-        <div th:if = "${totalPages > 1}">
-            <div class = "row col-sm-10">
-                <div class = "col-sm-2">
-                    Total Rows: [[${totalItems}]]
-                </div>
-                <div class = "col-sm-1">
+    <div th:if="${totalPages > 1}">
+        <div class="row col-sm-10">
+            <div class="col-sm-2">
+                Total Posts: [[${totalItems}]]
+            </div>
+            <div class="col-sm-1">
 
              <span th:each="i: ${#numbers.sequence(1, totalPages)}">
               <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
               <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
              </span>
 
-                </div>
-                <div class = "col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
-                    <span th:unless="${currentPage < totalPages}">Next</span>
-                </div>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
 
-                <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
-                    <span th:unless="${currentPage < totalPages}">Last</span>
-                </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
             </div>
         </div>
     </div>
-
-
+</div>
 
 </body>
 </html>

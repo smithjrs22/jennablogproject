@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Post</title>
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -12,9 +12,18 @@
 </head>
 <body>
     <form action="#" th:action="@{/savePost}" th:object="${post}" method="POST">
-        <input type="text" th:field="*{title}" placeholder="Post Title" class="form-control mb-4 col-4">
-
-        <textarea th:field="*{content}" placeholder="Enter content here" class="form-control mb-4 col-4"/>
+        <div>
+            <input type="text" th:field="*{title}" placeholder="Post Title" class="form-control mb-4 col-4" required>
+        </div>
+        <div id="error-message">
+            <span class="text-danger" th:errors="*{title}"> </span> 
+        </div>
+        <div>
+            <textarea th:field="*{content}" placeholder="Enter content here" class="form-control mb-4 col-4" required/>
+        </div>
+        <div id="error-message">
+            <span class="text-danger" th:errors="*{content}"> </span>
+        </div>
 
         <button type="submit" class="btn btn-info col-2"> Submit Post</button>
     </form>

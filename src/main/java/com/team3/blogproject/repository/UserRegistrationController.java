@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.team3.blogproject.services.UserService;
-import com.team3.blogproject.services.dto.UserRegistrationDto;
+import com.team3.blogproject.service.UserService;
+import com.team3.blogproject.service.dto.UserRegistrationDto;
 
 @Controller
 @RequestMapping("/registration")

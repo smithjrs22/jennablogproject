@@ -1,4 +1,4 @@
-package com.team3.blogproject.services.dto;
+package com.team3.blogproject.service.dto;
 
 public class UserRegistrationDto {
     private String firstName;

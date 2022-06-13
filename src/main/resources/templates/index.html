@@ -19,10 +19,18 @@
     <h1>Blog Site</h1>
     <a th:href = "@{/login}" class="btn btn-primary btn-sm mb-3"> Login </a>
     <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
-
+<!--http://localhost:8080/login?logout -->
     <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
 
+<!--message after submit you've successfully submitted-->
+<!--<button type="submit" class="btn btn-info col-2"> Submit Post</button>-->
+<div class="alert submit-info" th:if="${param.submit}" >Your blog post has been edited</div>
 
+<div th:if="${param.submit}">
+    <div class="alert alert-info">Your blog post has been edited</div>
+</div>
+
+<!--http://localhost:8080/?deleted -->
 <div class="alert delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
 
 <div class="container my-2 post-container">

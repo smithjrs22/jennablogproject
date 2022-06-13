@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Registration and Login App</title>
+    <title>Team 3 Blog Project</title>
 
     <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -20,8 +20,7 @@
                     class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">Registration and
-                Login Module</a>
+            <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
         </div>
     </div>
 </nav>
@@ -41,9 +40,6 @@
                         password.</div>
                 </div>
                 <!--you have been logged out -->
-                <div th:if="${param.logout}">
-                    <div class="alert alert-info">You have been logged out.</div>
-                </div>
                 <div class="form-group">
                     <label for="username">Username</label>: <input type="text"
                         id="username" name="username" class="form-control"

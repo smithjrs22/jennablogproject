@@ -23,7 +23,8 @@
     <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
 
 
-<div class="alert delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
+<div class="alert alert-info delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
+    <div class="alert alert-info update-alert" th:if="${param.updated}">Post has been successfully updated</div>
 
 <div class="container my-2 post-container">
     <h1>Post List</h1>
@@ -37,10 +38,10 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">
-                    <a href="/" th:text="${post.title}" th:href="@{/posts/view/{id}(id=${post.id})}"></a>
+                    <a href="/" th:text="${post.title}" th:href="@{/posts/{id}(id=${post.id})}"></a>
                 </h5>
                 <p class="card-text" th:text="${post.content}"></p>
-                <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{'/post/' + ${post.id} + '/update' }" class="btn btn-primary">Update</a>
                 <a th:href="@{/deletePost/{id}(id=${post.id})}" class="btn btn-danger">Delete</a>
             </div>
         </div>

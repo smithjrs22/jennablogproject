@@ -7,16 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 @Controller
-@Validated
 public class PostController {
 
     @Autowired
@@ -35,10 +30,7 @@ public class PostController {
     }
 
     @PostMapping("/savePost")
-    public String savePost(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/";
-        }
+    public String savePost(@ModelAttribute("post") Post post) {
         postService.savePost(post);
         return "redirect:/";
     }

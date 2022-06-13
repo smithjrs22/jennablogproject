@@ -17,7 +17,7 @@
 <body>
 
     <h1>Blog Site</h1>
-    <a th:href = "@{/login}" class="btn btn-primary btn-sm mb-3"> Login </a>
+    <a th:href = "@{/login}" sec:authorize="!isAuthenticated()" class="btn btn-primary btn-sm mb-3"> Login </a>
     <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
 
     <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>

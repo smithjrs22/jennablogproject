@@ -35,10 +35,12 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
 
-            <!-- success message -->
             <div th:if="${param.success}">
-                <div class="alert alert-info">You've successfully registered
-                    to our awesome app!</div>
+                <div class="alert alert-info">Thank you for registering!</div>
+            </div>
+
+            <div th:if="${param.error}">
+                <div class="alert alert-info">Sorry, there was an issue with your registration. Please try again.</div>
             </div>
 
             <h1>Registration</h1>

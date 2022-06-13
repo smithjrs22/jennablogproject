@@ -2,6 +2,7 @@ package com.team3.blogproject.controller;
 
 import com.team3.blogproject.model.Post;
 import com.team3.blogproject.service.PostService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;

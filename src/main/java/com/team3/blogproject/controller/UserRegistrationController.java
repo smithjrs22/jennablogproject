@@ -1,4 +1,4 @@
-package com.team3.blogproject.repository;
+package com.team3.blogproject.controller;
 
 
 import org.springframework.stereotype.Controller;
@@ -33,7 +33,13 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user")UserRegistrationDto registrationDto){
-        userService.save(registrationDto);
-        return "redirect:/registration?success";
+        try {
+            userService.save(registrationDto);
+            return "redirect:/registration?success";
+        } catch (Exception e) {
+            return "redirect:/registration?error";
+        }
+
+
     }
 }

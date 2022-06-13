@@ -1,8 +1,11 @@
 package com.team3.blogproject.model;
+import org.hibernate.validator.constraints.Length;
+
 import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="post")
@@ -20,6 +23,7 @@ public class Post {
 
     @NotEmpty(message = "Please fill out the required field")
     @Column(name="content")
+    @Size(max = 5000)
     private String content;
 
     public Post() {

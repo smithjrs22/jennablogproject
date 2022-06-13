@@ -11,6 +11,10 @@
 
 </head>
 <body>
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">There was an issue updating your post; please try again.</div>
+    </div>
+
     <form action="#" th:action="@{/savePost}" th:object="${post}" method="POST">
 
         <!-- Add hidden form field to handle update -->

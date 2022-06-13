@@ -34,16 +34,17 @@ public class PostController {
         return "forms/create_post";
     }
 
+    @CrossOrigin
     @PostMapping("/savePost")
     public String savePost(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/";
+            return "redirect:/post/{id}?/update?error";
         }
         postService.savePost(post);
-        return "redirect:/";
+        return "redirect:/?updated";
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/post/{id}/update")
     public String updatePost(@PathVariable(value = "id") long id, Model model) {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
@@ -78,7 +79,7 @@ public class PostController {
         return "index";
     }
 
-    @RequestMapping("/posts/view/{id}")
+    @RequestMapping("/posts/{id}")
     public String view(@PathVariable("id") Long id, Model model) {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);

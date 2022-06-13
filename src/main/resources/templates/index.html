@@ -15,10 +15,17 @@
 
 </head>
 <body>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="../static/img/sitedark.png" th:src="@{/img/sitedark.png}" width="250" height="100" alt="CFH Blog Site" class="d-inline-block align-text-top">
+            </a>
 
-    <h1>Blog Site</h1>
-    <a th:href = "@{/login}" sec:authorize="!isAuthenticated()" class="btn btn-primary btn-sm mb-3"> Login </a>
-    <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
+            <a th:href = "@{/login}" sec:authorize="!isAuthenticated()" class="btn btn-primary btn-sm mb-3"> Login </a>
+            <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
+        </div>
+    </nav>
+
 
     <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
 
@@ -61,9 +68,17 @@
 
             </div>
             <div class="col-sm-1">
-                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
-                <span th:unless="${currentPage < totalPages}">Next</span>
+                <a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">
+                    <span th:unless="${currentPage == 1}">Prev</span>
+                </a>
             </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">
+                    <span th:unless="${currentPage == totalPages}">Next</span>
+                </a>
+            </div>
+
 
             <div class="col-sm-1">
                 <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>

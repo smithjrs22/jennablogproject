@@ -67,7 +67,7 @@ public class PostController {
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
             Model model) {
-        int pageSize = 3;
+        int pageSize = 5;
         Page<Post> page = postService.findPaginated(pageNo, pageSize);
         List<Post> listPosts = page.getContent();
 

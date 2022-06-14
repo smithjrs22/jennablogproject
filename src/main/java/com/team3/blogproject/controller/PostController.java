@@ -2,11 +2,16 @@ package com.team3.blogproject.controller;
 
 import com.team3.blogproject.model.Post;
 import com.team3.blogproject.service.PostService;
+import com.team3.blogproject.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import  com.team3.blogproject.model.User;
 
 import java.util.List;
 
@@ -16,11 +21,14 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Autowired 
+    private UserService userService;
+
     @GetMapping("/")
     public String viewHomePage(Model model) {
         return findPaginated(1, model);
     }
-
+    
     @GetMapping("/post/new")
     public String showNewPostForm(Model model) {
         Post post = new Post();
@@ -30,8 +38,15 @@ public class PostController {
 
     @PostMapping("/savePost")
     public String savePost(@ModelAttribute("post") Post post) {
+
+        // Get author
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.findByUserName(auth.getName());
+//        Author author = new Author(user.getFirstName(), user.getLastName());
+        post.setAuthor(user);
         postService.savePost(post);
         return "redirect:/";
+
     }
 
     @GetMapping("/post/{id}")
@@ -57,7 +72,7 @@ public class PostController {
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
             Model model) {
-        int pageSize = 3;
+        int pageSize = 5;
         Page<Post> page = postService.findPaginated(pageNo, pageSize);
         List<Post> listPosts = page.getContent();
 
@@ -75,4 +90,8 @@ public class PostController {
         model.addAttribute("post", post);
         return "posts/view";
     }
+
+
+
+
 }

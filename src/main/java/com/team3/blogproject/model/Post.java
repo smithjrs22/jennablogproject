@@ -21,6 +21,20 @@ public class Post {
     @Column(name="content")
     private String content;
 
+//    @OneToOne
+//    @JoinColumn(name="author")
+//    private Author author;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private User author;
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     public Post() {
         this.date = new Date();
     }
@@ -62,4 +76,6 @@ public class Post {
     public void setContent(String content) {
         this.content = content;
     }
+
+
 }

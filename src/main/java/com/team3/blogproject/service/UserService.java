@@ -7,6 +7,4 @@ import com.team3.blogproject.service.dto.UserRegistrationDto;
 
 public interface UserService extends UserDetailsService{
     User save(UserRegistrationDto registrationDto);
-
-    User findByUserName(String name);
 }

@@ -54,9 +54,4 @@ public class UserServiceImpl implements UserService{
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    @Override
-    public User findByUserName(String userName) {
-        return this.userRepository.findByEmail(userName);
-    }
-
 }

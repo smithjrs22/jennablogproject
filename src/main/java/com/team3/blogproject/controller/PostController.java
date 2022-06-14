@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +17,10 @@ import  com.team3.blogproject.model.User;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @Controller
+@Validated
 public class PostController {
 
     @Autowired
@@ -36,7 +41,9 @@ public class PostController {
         return "forms/create_post";
     }
 
+    @CrossOrigin
     @PostMapping("/savePost")
+
     public String savePost(@ModelAttribute("post") Post post) {
 
         // Get author
@@ -47,9 +54,15 @@ public class PostController {
         postService.savePost(post);
         return "redirect:/";
 
+    public String savePost(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/post/{id}?/update?error";
+        }
+        postService.savePost(post);
+        return "redirect:/?updated";
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/post/{id}/update")
     public String updatePost(@PathVariable(value = "id") long id, Model model) {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
@@ -84,14 +97,11 @@ public class PostController {
         return "index";
     }
 
-    @RequestMapping("/posts/view/{id}")
+    @RequestMapping("/posts/{id}")
     public String view(@PathVariable("id") Long id, Model model) {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
         return "posts/view";
     }
-
-
-
-
 }
+

@@ -19,15 +19,23 @@
         <h2>Recent Posts</h2>
         <a href="#" th:each="p : ${latest5posts}" th:text="${p.title}" th:href="@{/posts/view/{id}/(id=${p.id})}"></a>
         </aside>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="../static/img/sitedark.png" th:src="@{/img/sitedark.png}" width="250" height="100" alt="CFH Blog Site" class="d-inline-block align-text-top">
+            </a>
 
-    <h1>Blog Site</h1>
-    <a th:href = "@{/login}" class="btn btn-primary btn-sm mb-3"> Login </a>
-    <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
+            <a th:href = "@{/login}" sec:authorize="!isAuthenticated()" class="btn btn-primary btn-sm mb-3"> Login </a>
+            <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
+        </div>
+    </nav>
+
 
     <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
 
 
-<div class="alert delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
+<div class="alert alert-info delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
+    <div class="alert alert-info update-alert" th:if="${param.updated}">Post has been successfully updated</div>
 
 <div class="container my-2 post-container">
     <h1>Post List</h1>
@@ -41,10 +49,10 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">
-                    <a href="/" th:text="${post.title}" th:href="@{/posts/view/{id}(id=${post.id})}"></a>
+                    <a href="/" th:text="${post.title}" th:href="@{/posts/{id}(id=${post.id})}"></a>
                 </h5>
                 <p class="card-text" th:text="${post.content}"></p>
-                <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{'/post/' + ${post.id} + '/update' }" class="btn btn-primary">Update</a>
                 <a th:href="@{/deletePost/{id}(id=${post.id})}" class="btn btn-danger">Delete</a>
             </div>
         </div>
@@ -64,9 +72,17 @@
 
             </div>
             <div class="col-sm-1">
-                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
-                <span th:unless="${currentPage < totalPages}">Next</span>
+                <a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">
+                    <span th:unless="${currentPage == 1}">Prev</span>
+                </a>
             </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">
+                    <span th:unless="${currentPage == totalPages}">Next</span>
+                </a>
+            </div>
+
 
             <div class="col-sm-1">
                 <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>

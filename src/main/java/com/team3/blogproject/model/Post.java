@@ -1,5 +1,4 @@
 package com.team3.blogproject.model;
-import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 

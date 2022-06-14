@@ -26,6 +26,20 @@ public class Post {
     @Size(max = 5000)
     private String content;
 
+//    @OneToOne
+//    @JoinColumn(name="author")
+//    private Author author;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private User author;
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     public Post() {
         this.date = new Date();
     }

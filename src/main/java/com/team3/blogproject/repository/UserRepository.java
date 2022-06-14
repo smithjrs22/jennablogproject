@@ -10,4 +10,6 @@ import com.team3.blogproject.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
+    
+
 }

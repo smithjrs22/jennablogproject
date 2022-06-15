@@ -49,7 +49,7 @@ public class PostController {
         User user = this.userService.findByUserName(auth.getName());
         post.setAuthor(user);
         postService.savePost(post);
-        return "redirect:/?updated";
+        return "redirect:/?submit";
 
     }
 

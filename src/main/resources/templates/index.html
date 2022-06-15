@@ -30,9 +30,12 @@
 
     <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
 
-
+<!--delete alert messge-->
 <div class="alert alert-info delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
-    <div class="alert alert-info update-alert" th:if="${param.updated}">Post has been successfully updated</div>
+<!--update alert message-->
+<div class="alert alert-info update-alert" th:if="${param.updated}">Post has been successfully updated</div>
+<!--submit alert message-->
+<div class="alert alert-success" th:if="${param.submit}"> Your blog post has been submitted</div> 
 
 <div class="container my-2 post-container">
 

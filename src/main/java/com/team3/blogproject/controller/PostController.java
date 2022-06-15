@@ -53,6 +53,18 @@ public class PostController {
 
     }
 
+    @PostMapping("/updatePost")
+    public String updatePost(@ModelAttribute("post") Post post) {
+
+        // Get author
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.findByUserName(auth.getName());
+        post.setAuthor(user);
+        postService.savePost(post);
+        return "redirect:/?update";
+
+    }
+
     @GetMapping("/post/{id}/update")
     public String updatePost(@PathVariable(value = "id") long id, Model model) {
         Post post = postService.getPostById(id);

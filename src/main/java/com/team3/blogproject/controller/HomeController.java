@@ -39,9 +39,10 @@ public class HomeController {
         model.addAttribute("latest3Posts", latest3Posts);
         return "index"; 
     }
-
+// display table users
     @GetMapping("/usernameTable")
     public String viewUsernameTable(Model model){
+    //create attribute
         model.addAttribute("listUsers", userService.getAllUsers());
         return "usernameTable";
 

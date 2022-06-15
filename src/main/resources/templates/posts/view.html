@@ -26,7 +26,11 @@
     <div class="date">
         <i>Posted on</i>
         <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}"></span>
-      
+
+        <span th:if="${post.author}" th:remove="tag">
+		    	<i>by</i>
+		        <span th:text="${post.author.firstName != null ? post.author.firstName : post.author.userName}"></span>
+		    </span>
     </div>
     <p class="content" th:utext="${post.content}">Post content</p>
   </article>

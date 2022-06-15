@@ -13,4 +13,5 @@ public interface UserService extends UserDetailsService{
 //gets all users and creates a list of users
 List<User> getAllUsers();
 
+    User findByUserName(String name);
 }

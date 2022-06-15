@@ -2,6 +2,7 @@ package com.team3.blogproject.controller;
 
 import com.team3.blogproject.model.Post;
 import com.team3.blogproject.service.PostService;
+import com.team3.blogproject.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,10 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import  com.team3.blogproject.model.User;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.validation.Valid;
 
 @Controller
 @Validated
@@ -21,6 +25,9 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String viewHomePage(Model model) {
@@ -34,14 +41,16 @@ public class PostController {
         return "forms/create_post";
     }
 
-    @CrossOrigin
     @PostMapping("/savePost")
-    public String savePost(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/post/{id}?/update?error";
-        }
+    public String savePost(@ModelAttribute("post") Post post) {
+
+        // Get author
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.findByUserName(auth.getName());
+        post.setAuthor(user);
         postService.savePost(post);
         return "redirect:/?updated";
+
     }
 
     @GetMapping("/post/{id}/update")
@@ -76,6 +85,12 @@ public class PostController {
         model.addAttribute("totalItems", page.getTotalElements());
 
         model.addAttribute("listPosts", listPosts);
+
+        // Get last 5 post
+        List<Post> latest5Posts = this.postService.findLatest5();
+        model.addAttribute("latest5Posts", latest5Posts);
+        List<Post> latest3Posts = latest5Posts.stream().limit(3).collect(Collectors.toList());
+        model.addAttribute("latest3Posts", latest3Posts);
         return "index";
     }
 

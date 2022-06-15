@@ -17,6 +17,23 @@ public class Post {
     @Column(name="date")
     private Date date;
 
+
+    //    @OneToOne
+//    @JoinColumn(name="author")
+//    private Author author;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private User author;
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+
+    //
     @NotEmpty(message = "Please fill out the required field")
     @Column(name="title")
     private String title;
@@ -26,7 +43,11 @@ public class Post {
     @Size(max = 5000)
     private String content;
 
+
+
+
     public Post() {
+
         this.date = new Date();
     }
 

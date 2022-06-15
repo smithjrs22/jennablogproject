@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -45,5 +47,14 @@ public class PostServiceImpl implements PostService {
 
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize).withSort(sort);
         return this.postRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Post> findLatest5() {
+//        return this.postRepository.findLatest5Posts( PageRequest.of(0,5) );
+        return this.postRepository
+                .findAll( PageRequest.of(0, 5) ).stream()
+                .sorted( (a,b) -> b.getDate().compareTo(a.getDate()) )
+                .collect(Collectors.toList());
     }
 }

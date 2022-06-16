@@ -38,3 +38,23 @@ body {
     transition: 0.4s;
 }
 
+
+#cardLogin {
+    margin: auto;
+    width: 60%;
+    border: 5px;
+    border-radius: 30px;
+    padding: 20px;
+    background: gray;
+}
+   
+#cardRegistration {
+    margin: auto;
+    width: 60%;
+    border: 5px;
+    border-radius: 30px;
+    padding: 20px;
+    background: gray;
+}
+
+

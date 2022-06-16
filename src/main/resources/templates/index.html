@@ -13,12 +13,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 </head>
 <body>
-    <nav class="navbar bg-dark">
+    <nav class="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="../static/img/sitedark.png" th:src="@{/img/sitedark.png}" width="250" height="100" alt="CFH Blog Site" class="d-inline-block align-text-top">
             </a>
-
+            <a class="nav-link" href="#" title="Homepage">Home</a>
+            <a class="nav-link" href="login.html" title="Login">Login</a>
+            <a class="nav-link" href="registration.html" title="Registration">Register</a>
+            <a class="nav-link" href="usernameTable.html" title="User List">Users</a>
             <a th:href = "@{/login}" sec:authorize="!isAuthenticated()" class="btn btn-primary btn-sm mb-3"> Login </a>
             <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
         </div>
@@ -37,7 +40,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <div class="container my-2 post-container">
 
     <aside>
-        <h2>Recent Posts</h2>
+        <h2 class="text-center">Recent Posts</h2>
         <tr th:each="p : ${latest5Posts}">
             <td>
                 <a href="/" th:text="${p.title}" th:href="@{/posts/{id}(id=${p.id})}"></a>
@@ -46,9 +49,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
         </tr>
     </aside>
 
-    <h1>Post List</h1>
+    <h1 class="text-center">Post List</h1>
 
-    <a sec:authorize="isAuthenticated()" th:href="@{/post/new}" class="btn btn-primary btn-sm mb-3"> Create New Post </a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/post/new}" class="btn create-btn btn-sm mb-3"> Create New Post </a>
 
     <div th:each="post : ${listPosts}">
         <div class="card">
@@ -60,8 +63,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
                     <a href="/" th:text="${post.title}" th:href="@{/posts/{id}(id=${post.id})}"></a>
                 </h5>
                 <p class="card-text" th:text="${post.content}"></p>
-                <a th:href="@{'/post/' + ${post.id} + '/update' }" class="btn btn-primary">Update</a>
-                <a th:href="@{/deletePost/{id}(id=${post.id})}" class="btn btn-danger">Delete</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{'/post/' + ${post.id} + '/update' }" class="btn btn-primary">Update</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/deletePost/{id}(id=${post.id})}" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
@@ -98,12 +101,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             </div>
         </div>
     </div>
-</div>
-
-<div>
-    <p>
-        <a th:href = "@{/usernameTable}">See other users!</a>
-    </p> 
 </div>
 
 <footer class="blog-footer">

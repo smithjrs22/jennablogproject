@@ -3,7 +3,22 @@ footer {
 }
 
 body {
-    background-color: #f6f9e7;
+    background-color: #64485c;
+}
+
+h1 {
+    color: white;
+}
+
+aside {
+    position: relative;
+    width: 50vh;
+    height: 75vh;
+    padding-left: 15px;
+    margin-left: 15px;
+    float: right;
+    font-style: italic;
+    background-color: lightgray;
 }
 
 .blog-footer {
@@ -38,3 +53,26 @@ body {
     transition: 0.4s;
 }
 
+.card-header {
+    background-color: #cc6a08;
+    color: white;
+}
+
+.card-body {
+    background-color: #83667b;
+    color: white;
+}
+
+.create-btn {
+    background-color: #efe2ba;
+}
+
+.btn-primary {
+    background-color: #e7717d;
+    float: right;
+}
+
+.btn-danger{
+    background-color: #c2b9b0;
+    float: right;
+}

@@ -51,9 +51,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findLatest5() {
-//        return this.postRepository.findLatest5Posts( PageRequest.of(0,5) );
         return this.postRepository
-                .findAll( PageRequest.of(0, 5) ).stream()
+                .findAll( PageRequest.of(0, 5,Sort.Direction.DESC,"id") ).stream()
                 .sorted( (a,b) -> b.getDate().compareTo(a.getDate()) )
                 .collect(Collectors.toList());
     }

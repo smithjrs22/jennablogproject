@@ -23,7 +23,7 @@
         <div class="alert alert-danger">There was an issue updating your post; please try again.</div>
     </div>
 
-    <form action="#" th:action="@{/savePost}" th:object="${post}" method="POST">
+    <form action="#" th:action="@{/updatePost}" th:object="${post}" method="POST">
 
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />

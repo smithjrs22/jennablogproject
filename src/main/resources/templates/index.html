@@ -14,6 +14,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 </head>
 <body>
     <nav class="navbar">
+
+    <nav class="navbar bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="../static/img/sitedark.png" th:src="@{/img/sitedark.png}" width="250" height="100" alt="CFH Blog Site" class="d-inline-block align-text-top">
@@ -27,12 +29,27 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
     <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
 
-
+<!--delete alert message-->
 <div class="alert alert-info delete-alert" th:if="${param.deleted}">Post has been successfully deleted</div>
-    <div class="alert alert-info update-alert" th:if="${param.updated}">Post has been successfully updated</div>
+<!--update alert message-->
+<div class="alert alert-info update-alert" th:if="${param.update}">Post has been successfully updated</div>
+<!--submit alert message-->
+<div class="alert alert-success" th:if="${param.submit}"> Your blog post has been submitted</div> 
 
 <div class="container my-2 post-container">
-    <h1 class="text-center">Latest Posts</h1>
+
+
+    <aside>
+        <h2>Recent Posts</h2>
+        <tr th:each="p : ${latest5Posts}">
+            <td>
+                <a href="/" th:text="${p.title}" th:href="@{/posts/{id}(id=${p.id})}"></a>
+                <br/>
+            </td>
+        </tr>
+    </aside>
+
+    <h1>Post List</h1>
 
     <a sec:authorize="isAuthenticated()" th:href="@{/post/new}" class="btn btn-primary btn-sm mb-3"> Create New Post </a>
 
@@ -59,10 +76,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             </div>
             <div class="col-sm-1">
 
-             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-              <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
-              <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-             </span>
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+            <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+            </span>
 
             </div>
             <div class="col-sm-1">
@@ -84,6 +101,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             </div>
         </div>
     </div>
+</div>
+
+<div>
+    <p>
+        <a th:href = "@{/usernameTable}">See other users!</a>
+    </p> 
 </div>
 
 <footer class="blog-footer">
@@ -124,5 +147,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
 </body>
 </html>

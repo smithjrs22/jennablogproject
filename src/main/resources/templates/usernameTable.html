@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Team 3 Blog Project</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container my-2">
+        <h2>Currently Logged in users</h2>
+        <!-- <a sec:authorize="isAuthenticated()" th:href="@{/login}" class="btn btn-primary btn-sm mb-3"></a> -->
+    
+        <table class="table table-striped table-responsive-md">
+            <thead>
+                <tr >
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                </tr>
+            </thead>
+        <tbody>
+            <!--th:each iteration-->
+            <tr th:each = "user : ${listUsers}">
+                <td th:text = "${user.email}"></td>
+                <td th:text = "${user.firstName}"></td>
+                <!-- <td th:text = "${user.lastName}"></td> this code shows full last name-->
+                <td th:text = "${#strings.substring(user.lastName, 0,1)}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

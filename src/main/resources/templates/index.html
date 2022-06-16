@@ -18,10 +18,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             <a class="navbar-brand" href="/">
                 <img src="../static/img/sitedark.png" th:src="@{/img/sitedark.png}" width="250" height="100" alt="CFH Blog Site" class="d-inline-block align-text-top">
             </a>
-            <a class="nav-link" href="#" title="Homepage">Home</a>
-            <a class="nav-link" href="login.html" title="Login">Login</a>
-            <a class="nav-link" href="registration.html" title="Registration">Register</a>
-            <a class="nav-link" href="usernameTable.html" title="User List">Users</a>
+            <a class="nav-link" th:href="@{/index}" title="Homepage">Home</a>
+            <a class="nav-link" th:href="@{/login}" title="Login">Login</a>
+            <a class="nav-link" th:href="@{/registration}" title="Registration">Register</a>
+            <a class="nav-link" th:href="@{/usernameTable}" title="User List">Users</a>
             <a th:href = "@{/login}" sec:authorize="!isAuthenticated()" class="btn btn-primary btn-sm mb-3"> Login </a>
             <a sec:authorize="isAuthenticated()" th:href = "@{/logout}" class="btn btn-danger btn-sm mb-3"> Logout </a>
         </div>

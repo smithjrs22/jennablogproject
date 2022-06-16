@@ -13,7 +13,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 </head>
 <body>
-    <nav class="navbar bg-dark">
+    <nav class="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="../static/img/sitedark.png" th:src="@{/img/sitedark.png}" width="250" height="100" alt="CFH Blog Site" class="d-inline-block align-text-top">
@@ -32,9 +32,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <div class="alert alert-info update-alert" th:if="${param.updated}">Post has been successfully updated</div>
 
 <div class="container my-2 post-container">
-    <h1 class="text-center">Post List</h1>
+    <h1 class="text-center">Latest Posts</h1>
 
-    <a sec:authorize="isAuthenticated()" th:href="@{/post/new}" class="btn btn-primary btn-sm mb-3"> Add Post </a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/post/new}" class="btn btn-primary btn-sm mb-3"> Create New Post </a>
 
     <div th:each="post : ${listPosts}">
         <div class="card">
@@ -86,8 +86,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     </div>
 </div>
 
-<footer>
-    <h4 class="text-center">Stay in touch with us!</h4>
+<footer class="blog-footer">
+    <h4 class="footer-header">Stay in touch with us!</h4>
     <div class="d-flex justify-content-center flex-nowrap">
         <div class="social-media-facebook" style="width: 90px">
             <a class="social-media-facebook-icon" href="https://www.facebook.com/carolinafintechhub/" title="Carolina Fintech Hub Facebook">
@@ -118,6 +118,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             </a>
         </div>
     </div>
+    <p class="copyright">&#169; 2022 Carolina Fintech Hub</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

@@ -1,3 +1,40 @@
-body {
-    background-color: green;
+footer {
+    box-shadow: 0 50vh 0 50vh #3A1027;
 }
+
+body {
+    background-color: #f6f9e7;
+}
+
+.blog-footer {
+    background-color: #3A1027;
+    color: white;
+}
+
+.copyright {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.footer-header {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.navbar {
+    background-color: #3A1027;
+    color: white;
+}
+
+.bi {
+    display: inline-block;
+    position: relative;
+}
+
+.bi:hover {
+    fill: #be1086;
+    transition: 0.4s;
+}
+

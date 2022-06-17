@@ -13,11 +13,15 @@
 
 <body>
 
-<nav class="navbar bg-dark">
+<nav class="navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
             <img src="../static/img/sitedark.png" th:src="@{/img/sitedark.png}" width="250" height="100" alt="CFH Blog Site" class="d-inline-block align-text-top">
         </a>
+        <a class="nav-link" th:href="@{/}" title="Homepage">Home</a>
+        <a class="nav-link" th:href="@{/login}" title="Login">Login</a>
+        <a class="nav-link" th:href="@{/registration}" title="Registration">Register</a>
+        <a class="nav-link" th:href="@{/usernameTable}" title="User List">Users</a>
     </div>
 </nav>
 
@@ -32,6 +36,7 @@
 		    	<i>by</i>
 		        <span th:text="${post.author.firstName != null ? post.author.firstName : post.author.userName}"></span>
 		    </span>
+            <hr>
     </div>
     <p class="content" th:utext="${post.content}">Post content</p>
   </article>

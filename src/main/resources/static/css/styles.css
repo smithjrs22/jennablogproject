@@ -6,7 +6,7 @@ body {
     background-color: #64485c;
 }
 
-h1 {
+h1, h2 {
     color: white;
 }
 
@@ -53,14 +53,24 @@ aside {
     transition: 0.4s;
 }
 
-
+.card {
+    padding: 15px;
+    margin: 15px;
+    background-color: #83667b;
+}
 .card-header {
     background-color: #cc6a08;
     color: white;
+    border-style: solid;
 }
 
 .card-body {
     background-color: #83667b;
+    color: white;
+    border-style: solid;
+}
+
+.content, .date {
     color: white;
 }
 
@@ -96,3 +106,14 @@ aside {
     background: gray;
 }
 
+.table-striped {
+    color: white;
+}
+
+.table-text {
+    color: gainsboro;
+}
+
+.pages {
+    color: white;
+}

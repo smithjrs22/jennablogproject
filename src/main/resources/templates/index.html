@@ -19,7 +19,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
                 <img src="../static/img/sitedark.png" th:src="@{/img/sitedark.png}" width="250" height="100" alt="CFH Blog Site" class="d-inline-block align-text-top">
             </a>
             <a class="nav-link" th:href="@{/}" title="Homepage">Home</a>
-            <a class="nav-link" th:href="@{/login}" title="Login">Login</a>
             <a class="nav-link" th:href="@{/registration}" title="Registration">Register</a>
             <a class="nav-link" th:href="@{/usernameTable}" title="User List">Users</a>
             <a th:href = "@{/login}" sec:authorize="!isAuthenticated()" class="btn btn-primary btn-sm mb-3"> Login </a>
@@ -56,7 +55,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <div th:each="post : ${listPosts}">
         <div class="card">
             <div class="card-header">
-                <p>Created on: <span th:text="${post.date}"></span></p>
+                <p>Created on: <span th:text="${post.date}"></span>
+                by <span th:text="${post.author.firstName != null ? post.author.firstName : post.author.userName}"></span></p>
             </div>
             <div class="card-body">
                 <h5 class="card-title">
@@ -69,7 +69,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
         </div>
     </div>
 
-    <div th:if="${totalPages > 1}">
+    <div class="pages" th:if="${totalPages > 1}">
         <div class="row col-sm-10">
             <div class="col-sm-2">
                 Total Posts: [[${totalItems}]]
@@ -77,26 +77,26 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
             <div class="col-sm-1">
 
             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+                <a class="post-link" th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
             <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
             </span>
 
             </div>
             <div class="col-sm-1">
-                <a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">
+                <a class="post-link" th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">
                     <span th:unless="${currentPage == 1}">Prev</span>
                 </a>
             </div>
 
             <div class="col-sm-1">
-                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">
+                <a class="post-link" th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">
                     <span th:unless="${currentPage == totalPages}">Next</span>
                 </a>
             </div>
 
 
             <div class="col-sm-1">
-                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
+                <a class="post-link" th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
                 <span th:unless="${currentPage < totalPages}">Last</span>
             </div>
         </div>
